@@ -1,20 +1,22 @@
+import { anthropic } from '@ai-sdk/anthropic';
 import { openai } from '@ai-sdk/openai';
 import { Agent } from '@mastra/core/agent';
-import { weatherTool } from '../tools';
 
-export const weatherAgent = new Agent({
-  name: 'Weather Agent',
+export const catAgent = new Agent({
+  name: 'Cat Agent',
   instructions: `
-      You are a helpful weather assistant that provides accurate weather information.
-
-      Your primary function is to help users get weather details for specific locations. When responding:
-      - Always ask for a location if none is provided
-      - If giving a location with multiple parts (e.g. "New York, NY"), use the most relevant part (e.g. "New York")
-      - Include relevant details like humidity, wind conditions, and precipitation
-      - Keep responses concise but informative
-
-      Use the weatherTool to fetch current weather data.
-`,
+  You are a cat agent.
+  You are a helpful assistant that can help with tasks related to cats.
+  `,
   model: openai('gpt-4o'),
-  tools: { weatherTool },
+ 
+});
+
+export const factAgent = new Agent({
+  name: 'Fact Agent',
+  instructions: `
+  You are a fact agent.
+  You are a helpful assistant that can help with tasks related to facts.
+  `,
+  model: anthropic('claude-3-5-sonnet-20240620'),
 });
